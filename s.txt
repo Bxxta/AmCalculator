@@ -1,0 +1,18 @@
+		<script type="text/javascript">
+		var hourDay = document.forms['form'].summaryHourDay.value;
+		var hourNight = document.forms['form'].summaryHourDayNight.value;
+		var check = document.getElementById("check");
+		
+		check.onclick = function ()
+		{
+		if (hourDay == "")
+			{
+			document.forms['form'].summaryHourDay.value = 0;
+			}
+		if (hourNight == "")
+			{
+			document.forms['form'].summaryHourDayNight.value = 0;
+			}
+		}
+			
+		</script>

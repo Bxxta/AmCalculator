@@ -1,0 +1,85 @@
+Krótki devBlog z aplikacji AmCalculator :) (niestety nie napisany od początku ;/)
+
+27 Sierpień 2015 r. (Łączny czas poświecony: około 20 godzin)
+
+Czas programowania : 1 godzina.
+
+Zrezygnowałem z użycia funkcji isset w PHP. Okazało się, że nie działa to jak powinno. Po drugie ilość warunków, komplikowała skrypt.
+Do rozwiązania problemu, użyłem undefined, co też nie poskutkowało.
+Po głębszych przemyśleniach, wybrałem pójście na łatwizne. Kazałem funkcji check , po przez wywołanie eventu onclick, czy pole "SummaryDay" oraz pole "SummaryDayNight".
+Zawierają wartość czy zostaną wysłane jako puste, a jeżeli tak przypisz im wartość 0. W końcu się udało i wysłało do skryptu PHP summary.php, wartość 0.
+Niestety jeden krok do przodu, dwa kroki w tył. Okazało się, że przez to są problemy funkcją PHP policz. Mam nadzieję, że uda mi się w miare szybko to załatwić.
+Obawiam, że termin ukończenia backEND-u, przekroczy zaplanowany termin- do końca sierpnia. A jeszcze tyle rzeczy brakuje: dominanty, urlopu, mediany i ciastek.
+
+29 Sierpień (Łączny czas poświecony: około 21 godzin)
+
+Czas programownia : 1 godzina
+
+Udało się problem naprawić. Teraz, program działał właściwie (tzn. nie sprawdzał statusu ucznia i takie tam). Ale... zobaczyłem ile państwo zabiera podatków i jest...
+to uwaga... 600 stów !. Słownie: Sześć stów!, bez statusu ucznia. Aż musiałem sprawdzić ręcznie obliczenia, bo nie dowierzałem. I wynik był prawidłowy. Japierdole.
+
+Ok. To jest devBlog i przekazywanie komentarzy, dotyczących polityki nie jest najlepszym pomysłem. DevBlog powinen być poważny. I coś w stylu tego i tego... dnia
+coś tam dodadno. Obowiązkowo typowo informatycznym językiem napisane. Czyż nie?
+
+Dobra, stop wbijaniu szpilki i wrócmy do projektu. Dziś dodane zostały nadgodziny. Niestety, zrodziło to kolejne problemy. O których opowiem jutro.
+
+
+
+
+
+
+30 Sierpień (Łączny czas poświecony: około 22 godzin)
+
+Ilośc godzin: 2 godz.
+
+Jak wiadomo diabeł tkwi w szczegółach. Nigdy myślałem, że to nie powiem, ale potrzebuje macierzy. Po co? Za chwilę opowiem.
+
+Powiedzmy, że mamy 180 godzin. 90 dziennych i 90 nocnych. Przy tym nocne są o 25% lepiej płatne. Średnio na godzinę mamy X, nie wiem ile jest na godzinę. Za to
+wiemy, że suma składowych X-ów stanowi sumę 2 składowych (brzmi skomplikowanie)  i znamy wartość. Wszystko się sprowadza do tego wzoru:
+
+90 x + 90( x + ((x25)/100 )  = 1800 dla przykładu.
+
+Bardziej na informatyczny język:
+
+$hourDay * x + $hourNight( x + ((25x)/100) = $nettoSum.
+
+Dlaczego to jest taki istotny problem. Dla przykładu: mamy klienta X który ma 120 godzin dziennych i 30 godzin nocnych. Stawka 12 zł (brutto). Wynik netto: 1257 zł.Obecnie skrypt da nam takie wyniki:
+godzina dzienna : 8.38.
+godzina nocna : 10.48.
+Odpowiada za to ten kod:
+
+
+			if( (!$hourDay == 0) AND (!$hourNight == 0) )
+			{
+			$hourAll  = $hourDay + $hourNight;
+			$posible_HourDay = round(($nettoSum/$hourAll) , 2);
+			$posible_HourNight = round ( (  (($posible_HourDay*25)/100) + $posible_HourDay), 2);
+			}
+			
+			if ( ($hourDay == 0 ) AND (!$hourNight == 0) )
+			{
+			$posible_HourDay = 0;
+			$posible_HourNight = round (($nettoSum/$hourNight),2);
+			
+			}
+Co jest oczywiście prawdą, ale nie zgodną z rzeczywistością. Dlaczego? Oto odpowiedż.
+
+120 ilosc godzin x 8.38 (stawka dzienna) = 1005.6,
+30 ilość godzin x 10.48 (stawka nocna (plus 25%) = 314.3
+Jak siędomyślcie to nie jest 1257 zł.
+
+Choć chyba mam pomysł. Jednak nie, nie mam pomysłu. Wrócę, do tego póżniej .
+
+Ciekawostka, status Studenta nie ma wpływu na wysokość składek. Czyt. Sry, płacisz wszystko. A ponoć umowy zlecenie są takie złe...
+
+Oprócz tego, doszła kolejna funkcja "średnia :)"
+
+
+1 wrzesień.
+
+Nie wiem, co się stało, ale wszystko pierdolnęło. Dosłownie. Nagle, wszędzie zaczęło czytać 0. Na dodatek brak żadnych wskazań i możliwych błędów. Wkurwiony jestem
+bo nie wiem co się stało. Heh.... Kolejny refactoring. 
+
+9 Wrzesień.
+
+Do kodu dołączyła dominanta, mediana, średnia zakończona. Ale ja chcę coś jeszcze włożyć, policzyć średnią na miesiące. Potem tylko ciastka, testy i wsio przechodzimy do frontEND-u:).

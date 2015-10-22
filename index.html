@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<html lang="pl">
+	<head>
+	<meta charset= "utf-8">
+	<meta author = "maternicki patryk">
+	<title>AmCalculator - Easy for your life</title>
+	<link href="css/style.css" media="screen" rel="stylesheet">
+	</head>
+		<body>
+		<form id="form" method="post" action="class/summary.php" action="class/stats.php">
+		Podaj swoją stawkę na godzinę:
+		<input type="text" name="zloty" id="checkZloty" size="2"> :zł <input type="text" name="grosze" id="checkGroszy" size="2"> :gr
+		<br>
+		Rodzaj umowy:
+		<input type="radio" name="umowa" id="checkUmowa" value="0"> Umowa zlecenie <input type="radio" name="umowa" id="checkUmowa" value="1"> Umowa o pracę
+		<br>
+		Czy jesteś uczniem?
+		<input type="radio" name="czyUczen" value="1"> Tak <input type="radio" name="czyUczen" value="0"> Nie
+		<br>
+		Ilość godzin dziennych: <input type="text" name="summaryHourDay" id="checkHourDay">
+		<br>
+		Ilość godzin nocnych: <input type="text" name="summaryHourDayNight" id="checkHourNight">
+		<br>
+		<input type="submit" id="check" value="Zapisz">
+		</form>
+		<script type="text/javascript">
+		var hourDay = document.forms['form'].summaryHourDay.value;
+		var hourNight = document.forms['form'].summaryHourDayNight.value;
+		var check = document.getElementById("check");
+		
+		check.onclick = function ()
+		{
+		if (hourDay == "")
+			{
+			document.forms['form'].summaryHourDay.value = 0;
+			}
+		if (hourNight == "")
+			{
+			document.forms['form'].summaryHourDayNight.value = 0;
+			}
+		}
+			
+		</script>
+		<?php
+		include ("class/stats.php");
+		?>
+		</body>
+</html>
+	
